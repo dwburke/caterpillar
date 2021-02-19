@@ -6,10 +6,10 @@ import (
 	"github.com/otiai10/copy"
 )
 
-func Sync() {
+func Sync(source string, destination string) error {
 	opt := copy.Options{
 		PreserveTimes: true,
 	}
-	err := copy.Copy("/home/dburke/bin", "/home/dburke/bin_copy", opt)
-	fmt.Println(err)
+	err := copy.Copy(source, destination, opt)
+	return err
 }
