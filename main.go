@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/dwburke/copyman/syncdir"
+	"github.com/dwburke/copyman/cmd"
 )
 
 func main() {
-	syncdir.Sync()
+	cmd.Execute()
 }
