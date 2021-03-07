@@ -37,15 +37,6 @@ func (this *DB) Close() {
 	}
 }
 
-func (this *DB) PutObj(key string, value interface{}) error {
-	if value == nil {
-		this.conn.Delete([]byte(key), nil)
-		return nil
-	}
-
-	return nil
-}
-
 func (this *DB) GetObj(key string, value interface{}) error {
 	v, err := this.conn.Get([]byte(key), nil)
 
