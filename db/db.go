@@ -16,7 +16,7 @@ type DB struct {
 }
 
 func init() {
-	viper.SetDefault("db.leveldb.datadir", tools.HomeDir()+"/.config/copyman/keystore")
+	viper.SetDefault("db.leveldb.datadir", tools.HomeDir()+"/.config/caterpillar/keystore")
 }
 
 func Open() (*DB, error) {

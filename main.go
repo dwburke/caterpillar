@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/dwburke/copyman/cmd"
+	"github.com/dwburke/caterpillar/cmd"
 )
 
 func main() {

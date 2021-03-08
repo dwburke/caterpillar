@@ -12,14 +12,14 @@ import (
 var cfgFile string
 
 func init() {
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.copyman.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.caterpillar.yaml)")
 
 	cobra.OnInitialize(initConfig)
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "copyman",
-	Short: "copyman is a thing",
+	Use:   "caterpillar",
+	Short: "caterpillar is a thing",
 	Long:  `Love me`,
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Usage()
@@ -49,7 +49,7 @@ func initConfig() {
 		// Search config in home directory with name ".cobra" (without extension).
 		viper.AddConfigPath(home)
 		viper.AddConfigPath("./")
-		viper.SetConfigName(".copyman")
+		viper.SetConfigName(".caterpillar")
 	}
 
 	if err := viper.ReadInConfig(); err != nil {
