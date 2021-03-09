@@ -3,6 +3,7 @@ package db
 import (
 	"bytes"
 	"encoding/gob"
+	"fmt"
 
 	"github.com/dwburke/go-tools"
 	"github.com/spf13/cast"
@@ -32,7 +33,9 @@ func Open() (*DB, error) {
 
 func (this *DB) Close() {
 	if this.conn != nil {
-		this.conn.Close()
+		if err := this.conn.Close(); err != nil {
+			fmt.Println(err)
+		}
 		this.conn = nil
 	}
 }

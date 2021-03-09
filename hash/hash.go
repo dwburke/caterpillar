@@ -1,10 +1,12 @@
 package hash
 
 import (
+	// #nosec
 	"crypto/md5"
 	"encoding/hex"
 	"io"
 	"os"
+	"path/filepath"
 )
 
 // taken from https://mrwaggel.be/post/generate-md5-hash-of-a-file-in-golang/
@@ -15,15 +17,17 @@ func Md5File(filePath string) (string, error) {
 	var returnMD5String string
 
 	//Open the passed argument and check for any error
-	file, err := os.Open(filePath)
+	file, err := os.Open(filepath.Clean(filePath)) // TODO - make sure this doesn' tbreak what already works
 	if err != nil {
 		return returnMD5String, err
 	}
 
 	//Tell the program to call the following function when the current function returns
+	// #nosec
 	defer file.Close()
 
 	//Open a new hash interface to write to
+	// #nosec
 	hash := md5.New()
 
 	//Copy the file in the hash interface and check for any error

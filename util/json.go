@@ -13,6 +13,7 @@ func JsonWrite(filename string, data interface{}) error {
 	}
 
 	//fmt.Println(string(b))
+	// #nosec
 	err = ioutil.WriteFile(filename, b, 0644)
 
 	return err

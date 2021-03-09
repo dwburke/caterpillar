@@ -21,8 +21,8 @@ var rootCmd = &cobra.Command{
 	Use:   "caterpillar",
 	Short: "caterpillar is a thing",
 	Long:  `Love me`,
-	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Usage()
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return cmd.Usage()
 	},
 }
 
