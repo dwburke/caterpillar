@@ -14,17 +14,16 @@ import (
 )
 
 func init() {
-	hashCmd.MarkFlagRequired("dir")
-
 	rootCmd.AddCommand(hashCmd)
 }
 
 var hashCmd = &cobra.Command{
-	Use:     "hash <dir>",
-	Short:   "hash",
-	Long:    `hash`,
-	Args:    cobra.ExactArgs(1),
-	Example: "hash foo",
+	Use:                   "hash <dir>",
+	Short:                 "hash",
+	Long:                  `hash`,
+	Args:                  cobra.ExactArgs(1),
+	Example:               "hash foo",
+	DisableFlagsInUseLine: true,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		var files []*File
