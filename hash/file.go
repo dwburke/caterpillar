@@ -1,6 +1,6 @@
-package cmd
+package hash
 
-type File struct {
+type FileData struct {
 	Name string `json:"name"`
 	Hash string `json:"hash"`
 }
