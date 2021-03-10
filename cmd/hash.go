@@ -28,19 +28,12 @@ var hashCmd = &cobra.Command{
 
 		var files []*File
 
-		//if str, err := hash.Md5File("/etc/hosts"); err != nil {
-		//panic(err)
-		//} else {
-		//fmt.Println(str)
-		//}
-
 		dir := util.TrimSuffix(args[0], "/")
 		dir, err := filepath.Abs(dir)
 		if err != nil {
 			panic(err)
 		}
 
-		//dirname := "some/directory/root"
 		err = godirwalk.Walk(dir, &godirwalk.Options{
 			Callback: func(osPathname string, de *godirwalk.Dirent) error {
 				// Following string operation is not most performant way
@@ -64,7 +57,6 @@ var hashCmd = &cobra.Command{
 					return err
 				}
 
-				//dir := filepath.Dir(osPathname)
 				parent := filepath.Base(dir)
 				fmt.Printf("%s\n%s/%s\n", osPathname, parent, rel)
 
@@ -94,12 +86,6 @@ var hashCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-
-		//if b, err := json.MarshalIndent(files, "", "  "); err != nil {
-		//panic(err)
-		//} else {
-		//fmt.Println(string(b))
-		//}
 
 	},
 }
