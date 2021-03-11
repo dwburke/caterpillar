@@ -14,17 +14,25 @@ Writing file: /home/dburke/repos/caterpillar/hash.json
 
 boa:~/repos/caterpillar(primaria)$ cat hash.json
 {
+  "hash/.": {
+    "name": "hash/.",
+    "hash": "",
+    "file_mode": 2147483648
+  },
   "hash/file.go": {
     "name": "hash/file.go",
-    "hash": "514c1ea7456b11c1bc8a89927206602b"
+    "hash": "a96ec21ccab5eb4b6a6bbba1fa7c321e",
+    "file_mode": 0
   },
   "hash/hash.go": {
     "name": "hash/hash.go",
-    "hash": "4b7d6cd1868de6b8adf5960fa569f718"
+    "hash": "4b7d6cd1868de6b8adf5960fa569f718",
+    "file_mode": 0
   },
   "hash/tree.go": {
     "name": "hash/tree.go",
-    "hash": "12b2a2e47897141494342b2fe6a37d3f"
+    "hash": "febc0912faa2ad15a046c0c88c84100b",
+    "file_mode": 0
   }
 }
 ```
