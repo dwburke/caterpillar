@@ -22,6 +22,21 @@ func HashTree(root string) (string, map[string]*FileData, error) {
 
 	err = godirwalk.Walk(dir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
+
+			rel, err := filepath.Rel(dir, osPathname)
+			if err != nil {
+				return err
+			}
+
+			parent := filepath.Base(dir)
+
+			save_filename := fmt.Sprintf("%s/%s", parent, rel)
+			f := &FileData{
+				Name:     save_filename,
+				FileMode: de.ModeType(),
+			}
+			files[save_filename] = f
+
 			if b, err := de.IsDirOrSymlinkToDir(); b == true && err == nil {
 				return nil
 			}
@@ -38,24 +53,16 @@ func HashTree(root string) (string, map[string]*FileData, error) {
 				return nil
 			}
 
-			rel, err := filepath.Rel(dir, osPathname)
+			md5Str := ""
+			md5Str, err = Md5File(osPathname)
 			if err != nil {
 				return err
 			}
 
-			parent := filepath.Base(dir)
-
-			str, err := Md5File(osPathname)
-			if err != nil {
-				return err
-			}
+			f.Hash = md5Str
 
 			fmt.Printf("%s %s/%s\n",
-				str, parent, rel)
-
-			save_filename := fmt.Sprintf("%s/%s", parent, rel)
-			f := &FileData{Name: save_filename, Hash: str}
-			files[save_filename] = f
+				md5Str, parent, rel)
 
 			return nil
 		},
