@@ -53,7 +53,7 @@ func initConfig() {
 	}
 
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Fprintf(os.Stderr, "Unable to load config file, using defaults.\n")
+		//fmt.Fprintf(os.Stderr, "Unable to load config file, using defaults.\n")
 		//fmt.Println("Can't read config:", err)
 		//os.Exit(1)
 	}
