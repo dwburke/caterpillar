@@ -2,6 +2,7 @@ package hash
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/karrick/godirwalk"
@@ -22,6 +23,18 @@ func HashTree(root string) (string, map[string]*FileData, error) {
 	err = godirwalk.Walk(dir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
 			if b, err := de.IsDirOrSymlinkToDir(); b == true && err == nil {
+				return nil
+			}
+			if de.IsDevice() {
+				return nil
+			}
+			if de.ModeType()&os.ModeSocket != 0 {
+				return nil
+			}
+			if de.ModeType()&os.ModeNamedPipe != 0 {
+				return nil
+			}
+			if de.ModeType()&os.ModeCharDevice != 0 {
 				return nil
 			}
 
