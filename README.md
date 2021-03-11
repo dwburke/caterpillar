@@ -11,6 +11,7 @@ boa:~/repos/caterpillar(primaria)$ ./caterpillar hash ./hash/
 4b7d6cd1868de6b8adf5960fa569f718 hash/hash.go
 12b2a2e47897141494342b2fe6a37d3f hash/tree.go
 Writing file: /home/dburke/repos/caterpillar/hash.json
+
 boa:~/repos/caterpillar(primaria)$ cat hash.json
 {
   "hash/file.go": {
