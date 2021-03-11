@@ -2,9 +2,7 @@ package hash
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/karrick/godirwalk"
 
@@ -23,39 +21,24 @@ func HashTree(root string) (string, map[string]*FileData, error) {
 
 	err = godirwalk.Walk(dir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
-			// Following string operation is not most performant way
-			// of doing this, but common enough to warrant a simple
-			// example here:
-			if strings.Contains(osPathname, ".git") {
-				return godirwalk.SkipThis
-			}
-
 			if b, err := de.IsDirOrSymlinkToDir(); b == true && err == nil {
 				return nil
 			}
 
-			cwd, err := os.Getwd()
-			if err != nil {
-				return err
-			}
-
-			rel, err := filepath.Rel(cwd, osPathname)
+			rel, err := filepath.Rel(dir, osPathname)
 			if err != nil {
 				return err
 			}
 
 			parent := filepath.Base(dir)
-			fmt.Printf("%s\n%s/%s\n", osPathname, parent, rel)
 
 			str, err := Md5File(osPathname)
 			if err != nil {
 				return err
 			}
 
-			fmt.Printf("%s %s %s\n",
-				de.ModeType(),
-				str,
-				osPathname)
+			fmt.Printf("%s %s/%s\n",
+				str, parent, rel)
 
 			save_filename := fmt.Sprintf("%s/%s", parent, rel)
 			f := &FileData{Name: save_filename, Hash: str}
@@ -63,7 +46,7 @@ func HashTree(root string) (string, map[string]*FileData, error) {
 
 			return nil
 		},
-		Unsorted: false, // (optional) set true for faster yet non-deterministic enumeration (see godoc)
+		Unsorted: false,
 	})
 
 	if err != nil {
