@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 
 	"github.com/dwburke/caterpillar/hash"
@@ -25,6 +27,7 @@ var hashCmd = &cobra.Command{
 			return err
 		}
 
+		fmt.Printf("Writing file: %s\n", dir+".json")
 		err = util.JsonWrite(dir+".json", files)
 		if err != nil {
 			return err
