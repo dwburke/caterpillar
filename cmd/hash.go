@@ -1,13 +1,11 @@
 package cmd
 
 import (
-	"fmt"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
 
 	"github.com/dwburke/caterpillar/hash"
-	"github.com/dwburke/caterpillar/util"
 )
 
 func init() {
@@ -37,9 +35,7 @@ var hashCmd = &cobra.Command{
 			save_file = filepath.Clean(output_file)
 		}
 
-		fmt.Printf("Writing file: %s\n", save_file)
-		err = util.JsonWrite(save_file, files)
-		if err != nil {
+		if err = hash.SaveJson(save_file, files); err != nil {
 			return err
 		}
 
