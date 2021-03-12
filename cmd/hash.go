@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 
@@ -10,6 +11,8 @@ import (
 )
 
 func init() {
+	hashCmd.Flags().String("output", "", "file to save the json to (defaults to <dir.json>)")
+
 	rootCmd.AddCommand(hashCmd)
 }
 
@@ -27,8 +30,15 @@ var hashCmd = &cobra.Command{
 			return err
 		}
 
-		fmt.Printf("Writing file: %s\n", dir+".json")
-		err = util.JsonWrite(dir+".json", files)
+		save_file := dir + ".json"
+
+		output_file, _ := cmd.Flags().GetString("output")
+		if output_file != "" {
+			save_file = filepath.Clean(output_file)
+		}
+
+		fmt.Printf("Writing file: %s\n", save_file)
+		err = util.JsonWrite(save_file, files)
 		if err != nil {
 			return err
 		}
