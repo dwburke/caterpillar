@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/dwburke/caterpillar/hash"
+	"github.com/dwburke/caterpillar/util"
 )
 
 func init() {
@@ -23,7 +24,13 @@ var hashCmd = &cobra.Command{
 	DisableFlagsInUseLine: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		dir, files, err := hash.HashTree(args[0])
+		dir := util.TrimSuffix(args[0], "/")
+		dir, err := filepath.Abs(dir)
+		if err != nil {
+			return err
+		}
+
+		files, err := hash.HashTree(dir)
 		if err != nil {
 			return err
 		}

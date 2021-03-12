@@ -6,21 +6,13 @@ import (
 	"path/filepath"
 
 	"github.com/karrick/godirwalk"
-
-	"github.com/dwburke/caterpillar/util"
 )
 
-func HashTree(root string) (string, map[string]*FileData, error) {
+func HashTree(dir string) (map[string]*FileData, error) {
 
 	files := make(map[string]*FileData)
 
-	dir := util.TrimSuffix(root, "/")
-	dir, err := filepath.Abs(dir)
-	if err != nil {
-		return "", nil, err
-	}
-
-	err = godirwalk.Walk(dir, &godirwalk.Options{
+	err := godirwalk.Walk(dir, &godirwalk.Options{
 		Callback: func(osPathname string, de *godirwalk.Dirent) error {
 
 			rel, err := filepath.Rel(dir, osPathname)
@@ -70,8 +62,8 @@ func HashTree(root string) (string, map[string]*FileData, error) {
 	})
 
 	if err != nil {
-		return "", nil, err
+		return nil, err
 	}
 
-	return dir, files, nil
+	return files, nil
 }
