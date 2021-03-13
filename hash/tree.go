@@ -53,9 +53,6 @@ func HashTree(dir string) (map[string]*FileData, error) {
 
 			f.Hash = md5Str
 
-			fmt.Printf("%s %s/%s\n",
-				md5Str, parent, rel)
-
 			return nil
 		},
 		Unsorted: false,
