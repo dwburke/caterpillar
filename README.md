@@ -44,10 +44,7 @@ boa:~/repos/caterpillar(primaria)$ cat hash.json
 
 ## TODO
 
-* read current json file if exists, and display differences (new files, missing files, hash changes)
+* ~read current json file if exists, and display differences (new files, missing files, hash changes)~
 * optionally save json file
-* optionally save json file if differences are found
-* optional to change json file name/location
-* add data to json file about path being read?
-* 
+* ~optional to change json file name/location~
 
