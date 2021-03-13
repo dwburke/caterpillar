@@ -84,6 +84,9 @@ var hashCmd = &cobra.Command{
 		sort.Strings(names)
 		for _, n := range names {
 			v := files[n]
+			if v.Hash == "" {
+				continue
+			}
 			fmt.Printf("%32s %s\n", v.Hash, v.Name)
 		}
 
