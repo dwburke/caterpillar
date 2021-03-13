@@ -24,7 +24,7 @@ require (
 	github.com/syndtr/goleveldb v1.0.0
 	github.com/ugorji/go v1.2.4 // indirect
 	golang.org/x/crypto v0.0.0-20210220033148-5ea612d1eb83 // indirect
-	golang.org/x/sys v0.0.0-20210309074719-68d13333faf2 // indirect
+	golang.org/x/sys v0.0.0-20210313110737-8e9fff1a3a18 // indirect
 	golang.org/x/text v0.3.5 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
