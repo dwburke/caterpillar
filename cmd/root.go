@@ -46,15 +46,13 @@ func initConfig() {
 			os.Exit(1)
 		}
 
-		// Search config in home directory with name ".cobra" (without extension).
 		viper.AddConfigPath(home)
-		viper.AddConfigPath("./")
 		viper.SetConfigName(".caterpillar")
 	}
 
 	if err := viper.ReadInConfig(); err != nil {
-		//fmt.Fprintf(os.Stderr, "Unable to load config file, using defaults.\n")
-		//fmt.Println("Can't read config:", err)
-		//os.Exit(1)
+		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
+			panic(err)
+		}
 	}
 }
