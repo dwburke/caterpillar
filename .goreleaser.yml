@@ -4,6 +4,8 @@ project_name: caterpillar
 builds:
 - env:
   - CGO_ENABLED=0
+  ldflags:
+  - -extldflags=-static
 archives:
   -
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"

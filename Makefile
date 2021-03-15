@@ -2,7 +2,10 @@
 GORELEASER_VERSION=v0.159.0
 
 default:
-	go build
+	$(MAKE) build
+
+build:
+	CGO_ENABLED=0 go build -ldflags="-extldflags=-static"
 
 
 update:
