@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"sort"
+	//"sort"
 
 	"github.com/spf13/cobra"
 
@@ -27,6 +27,8 @@ var hashCmd = &cobra.Command{
 	Example:               "hash foo",
 	DisableFlagsInUseLine: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
+
+		var differences bool
 
 		dir := util.TrimSuffix(args[0], "/")
 		dir, err := filepath.Abs(dir)
@@ -63,38 +65,44 @@ var hashCmd = &cobra.Command{
 		for k, v := range old_files {
 			nfile, ok := files[k]
 			if !ok {
+				differences = true
 				fmt.Printf("%s : removed\n", k)
 				continue
 			}
 			if nfile.Hash != v.Hash {
-				fmt.Printf("%s : hash changed\n", k)
+				differences = true
+				fmt.Printf("%s : hash changed (%s)\n", k, nfile.Hash)
 			}
 			if nfile.FileMode != v.FileMode {
+				differences = true
 				fmt.Printf("%s : \n", k)
 			}
 		}
 
-		var names []string
+		//var names []string
 
-		for k, _ := range files {
-			names = append(names, k)
+		for k, v := range files {
+			//names = append(names, k)
 			if _, ok := old_files[k]; !ok {
-				fmt.Printf("%s : added\n", k)
+				differences = true
+				fmt.Printf("%s : added (%s)\n", v.Name, v.Hash)
 			}
 		}
 
-		sort.Strings(names)
-		for _, n := range names {
-			v := files[n]
-			if v.Hash == "" {
-				continue
-			}
-			fmt.Printf("%32s %s\n", v.Hash, v.Name)
-		}
+		//sort.Strings(names)
+		//for _, n := range names {
+		//v := files[n]
+		//if v.Hash == "" {
+		//continue
+		//}
+		//fmt.Printf("%32s %s\n", v.Hash, v.Name)
+		//}
 
-		if write_file, _ := cmd.Flags().GetBool("write"); write_file {
-			if err = hash.SaveJson(save_file, files); err != nil {
-				return err
+		if differences {
+			if write_file, _ := cmd.Flags().GetBool("write"); write_file {
+				if err = hash.SaveJson(save_file, files); err != nil {
+					return err
+				}
 			}
 		}
 
