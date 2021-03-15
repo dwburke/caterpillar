@@ -4,10 +4,6 @@ project_name: caterpillar
 builds:
 - env:
   - CGO_ENABLED=0
-  ignore:
-  - goos: darwin
-  - goos: linux
-    goarch: 386
 archives:
   -
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
@@ -42,8 +38,9 @@ nfpms:
     license: "Free and open source; credit required"
     maintainer: "dburke@addictmud.org"
     description: "The provisioning REST api."
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     formats:
+      - apk
       - rpm
       - deb
     bindir: "/usr/local/bin"
