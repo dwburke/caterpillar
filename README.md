@@ -7,12 +7,9 @@ any files were added or deleted since last run.
 Example:
 ```
 boa:~/repos/caterpillar(primaria)$ ./caterpillar hash ./hash/ --write
-hash/file.go : added
+hash/file.go : added (514c1ea7456b11c1bc8a89927206602b)
 hash/type.go : removed
-hash/tree.go : hash changed
-514c1ea7456b11c1bc8a89927206602b hash/file.go
-4b7d6cd1868de6b8adf5960fa569f718 hash/hash.go
-12b2a2e47897141494342b2fe6a37d3f hash/tree.go
+hash/tree.go : hash changed (12b2a2e47897141494342b2fe6a37d3f)
 Writing file: /home/dburke/repos/caterpillar/hash.json
 
 boa:~/repos/caterpillar(primaria)$ cat hash.json
