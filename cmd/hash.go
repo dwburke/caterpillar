@@ -63,6 +63,7 @@ var hashCmd = &cobra.Command{
 			nfile, ok := files[k]
 			if !ok {
 				fmt.Printf("%s : removed\n", k)
+				continue
 			}
 			if nfile.Hash != v.Hash {
 				fmt.Printf("%s : hash changed\n", k)
