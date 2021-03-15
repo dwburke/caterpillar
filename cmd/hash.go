@@ -29,6 +29,7 @@ var hashCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 
 		var differences bool
+		var exit_code int
 
 		dir := util.TrimSuffix(args[0], "/")
 		dir, err := filepath.Abs(dir)
@@ -67,15 +68,18 @@ var hashCmd = &cobra.Command{
 			if !ok {
 				differences = true
 				fmt.Printf("%s : removed\n", k)
+				exit_code |= (1 << 3)
 				continue
 			}
 			if nfile.Hash != v.Hash {
 				differences = true
 				fmt.Printf("%s : hash changed (%s)\n", k, nfile.Hash)
+				exit_code |= (1 << 1)
 			}
 			if nfile.FileMode != v.FileMode {
 				differences = true
 				fmt.Printf("%s : \n", k)
+				exit_code |= (1 << 4)
 			}
 		}
 
@@ -86,6 +90,7 @@ var hashCmd = &cobra.Command{
 			if _, ok := old_files[k]; !ok {
 				differences = true
 				fmt.Printf("%s : added (%s)\n", v.Name, v.Hash)
+				exit_code |= (1 << 2)
 			}
 		}
 
@@ -105,6 +110,8 @@ var hashCmd = &cobra.Command{
 				}
 			}
 		}
+
+		os.Exit(exit_code)
 
 		return nil
 	},

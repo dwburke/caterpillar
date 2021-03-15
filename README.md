@@ -41,6 +41,14 @@ boa:~/repos/caterpillar(primaria)$ cat hash.json
 
 * The "hash" command will move to the root if no other commands become necessary.
 
+## Exit Codes
+
+* 1 - application error
+* (1 << 1) - a file hash changed
+* (1 << 2) - a file was added
+* (1 << 3) - a file was removed
+* (1 << 4) - file mode changed
+
 ## TODO
 
 * ~read current json file if exists, and display differences (new files, missing files, hash changes)~
