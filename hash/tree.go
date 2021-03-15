@@ -23,9 +23,16 @@ func HashTree(dir string) (map[string]*FileData, error) {
 			parent := filepath.Base(dir)
 
 			save_filename := fmt.Sprintf("%s/%s", parent, rel)
+
+			info, err := os.Stat(save_filename)
+			if err != nil {
+				return err
+			}
+
 			f := &FileData{
-				Name:     save_filename,
-				FileMode: de.ModeType(),
+				Name:        save_filename,
+				FileMode:    de.ModeType(),
+				Permissions: info.Mode(),
 			}
 			files[save_filename] = f
 

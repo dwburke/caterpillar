@@ -78,8 +78,13 @@ var hashCmd = &cobra.Command{
 			}
 			if nfile.FileMode != v.FileMode {
 				differences = true
-				fmt.Printf("%s : \n", k)
+				fmt.Printf("%s : filemode changed [%v] -> [%v]\n", k, v.FileMode, nfile.FileMode)
 				exit_code |= (1 << 4)
+			}
+			if nfile.Permissions != v.Permissions {
+				differences = true
+				fmt.Printf("%s : file permissions changed [%v] -> [%v]\n", k, v.Permissions, nfile.Permissions)
+				exit_code |= (1 << 5)
 			}
 		}
 

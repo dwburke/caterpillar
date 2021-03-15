@@ -48,6 +48,7 @@ boa:~/repos/caterpillar(primaria)$ cat hash.json
 * (1 << 2) - a file was added
 * (1 << 3) - a file was removed
 * (1 << 4) - file mode changed
+* (1 << 5) - file permissions changed
 
 ## TODO
 
