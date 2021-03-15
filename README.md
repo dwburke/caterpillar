@@ -39,8 +39,7 @@ boa:~/repos/caterpillar(primaria)$ cat hash.json
 
 ## Known issues
 
-* It's rough a work in progress; atm it only saves the hashes
-* It will be refactored as it evolves
+* The "hash" command will move to the root if no other commands become necessary.
 
 ## TODO
 
