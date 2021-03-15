@@ -27,7 +27,7 @@ changelog:
     - '^test:'
 release:
   prerelease: auto
-  disable: true
+  disable: false
 nfpms:
   -
     replacements:
