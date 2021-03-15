@@ -14,6 +14,7 @@ import (
 
 func init() {
 	hashCmd.Flags().String("output", "", "file to save the json to (defaults to <dir.json>)")
+	hashCmd.Flags().Bool("write", false, "write json file (just generates hashes and compares with previous version by default)")
 
 	rootCmd.AddCommand(hashCmd)
 }
@@ -91,8 +92,10 @@ var hashCmd = &cobra.Command{
 			fmt.Printf("%32s %s\n", v.Hash, v.Name)
 		}
 
-		if err = hash.SaveJson(save_file, files); err != nil {
-			return err
+		if write_file, _ := cmd.Flags().GetBool("write"); write_file {
+			if err = hash.SaveJson(save_file, files); err != nil {
+				return err
+			}
 		}
 
 		return nil
