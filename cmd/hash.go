@@ -13,7 +13,7 @@ import (
 )
 
 func init() {
-	hashCmd.Flags().String("output", "", "file to save the json to (defaults to <dir.json>)")
+	hashCmd.Flags().String("output", "", "file to save the json to (defaults to '<dir>.json')")
 	hashCmd.Flags().Bool("write", false, "write json file (just generates hashes and compares with previous version by default)")
 
 	rootCmd.AddCommand(hashCmd)
